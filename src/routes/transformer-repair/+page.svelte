@@ -2,7 +2,7 @@
 	import { m } from '$lib/paraglide/messages';
 </script>
 
-<main class="flex justify-center px-4 py-2">
+<main class="mt-20 flex justify-center px-4 py-2">
 	<article class="prose prose-sm md:prose-base lg:prose-xl">
 		<h1>{m.glad_brave_llama_blink()}</h1>
 

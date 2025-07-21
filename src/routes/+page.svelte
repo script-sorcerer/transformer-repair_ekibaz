@@ -4,8 +4,6 @@
 	import { ArrowsDownLineIcon, InstagramIcon } from '$lib/icons';
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale } from '$lib/paraglide/runtime';
-	import { elasticInOut } from 'svelte/easing';
-	import { fly } from 'svelte/transition';
 
 	function getMapWidgetLang() {
 		const locale = getLocale();
@@ -27,7 +25,7 @@
 	<section class="relative">
 		<div
 			class="hero min-h-screen"
-			style="background-image: url('/hero-bg.webp'); background-attachment: fixed; background-size: cover;"
+			style="background-image: url('/hero-bg.webp'); background-attachment: fixed;"
 		>
 			<div class="hero-overlay"></div>
 			<div class="hero-content text-neutral-content text-center">
@@ -75,7 +73,7 @@
 						</p>
 
 						<div class="card-actions justify-end">
-							<a href="/service-details/transformer-repair" class="btn btn-neutral">
+							<a href="/transformer-repair" class="btn btn-neutral">
 								{m.grand_knotty_monkey_bless()}
 							</a>
 						</div>
@@ -93,7 +91,7 @@
 						</p>
 
 						<div class="card-actions justify-end">
-							<a href="/service-details/transformer-repair" class="btn btn-neutral">
+							<a href="/transformer-installation" class="btn btn-neutral">
 								{m.grand_knotty_monkey_bless()}
 							</a>
 						</div>
@@ -112,7 +110,7 @@
 						</p>
 
 						<div class="card-actions justify-end">
-							<a href="/service-details/transformer-repair" class="btn btn-neutral">
+							<a href="/welding-repair" class="btn btn-neutral">
 								{m.grand_knotty_monkey_bless()}
 							</a>
 						</div>

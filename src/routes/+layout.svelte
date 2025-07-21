@@ -42,9 +42,9 @@
 	<div class="navbar bg-base-100 shadow-sm">
 		<div class="navbar-start">
 			<div class="dropdown">
-				<button class="btn btn-ghost h-6 w-6 md:hidden">
+				<div tabindex="0" role="button" class="btn btn-ghost h-6 w-6 md:hidden">
 					<ToastIcon />
-				</button>
+				</div>
 
 				<ul
 					tabindex="0"

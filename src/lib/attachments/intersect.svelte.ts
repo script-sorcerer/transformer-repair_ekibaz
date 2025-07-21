@@ -21,6 +21,6 @@ export default function (onIntersect: (element: Element) => void): Attachment {
 
 		observer.observe(node);
 
-		return observer.disconnect;
+		return () => observer.disconnect();
 	};
 }

@@ -17,6 +17,11 @@
 
 	onMount(() => {
 		typing();
+
+		return () => {
+			clearInterval(typingInterval);
+			clearInterval(cleaningInterval);
+		};
 	});
 
 	function calculateIntervalDelay(phrase: string, duration: number) {
