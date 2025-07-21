@@ -1,7 +1,11 @@
 <script lang="ts">
-	import { ArrowsDownLineIcon } from '$lib/icons';
+	import { intersect } from '$lib/attachments';
+	import { TypeWriter } from '$lib/components';
+	import { ArrowsDownLineIcon, InstagramIcon } from '$lib/icons';
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale } from '$lib/paraglide/runtime';
+	import { elasticInOut } from 'svelte/easing';
+	import { fly } from 'svelte/transition';
 
 	function getMapWidgetLang() {
 		const locale = getLocale();
@@ -19,27 +23,39 @@
 	}
 </script>
 
-<header></header>
-
 <main>
 	<section class="relative">
-		<div class="hero min-h-screen" style="background-image: url('/hero-bg.webp')">
+		<div
+			class="hero min-h-screen"
+			style="background-image: url('/hero-bg.webp'); background-attachment: fixed; background-size: cover;"
+		>
 			<div class="hero-overlay"></div>
 			<div class="hero-content text-neutral-content text-center">
 				<div class="max-w-xl">
-					<h1 class="mb-5 text-3xl font-bold md:text-5xl">{m.tidy_honest_albatross_foster()}</h1>
+					<h1 class="mb-5 text-3xl font-bold md:text-5xl">
+						<TypeWriter
+							delay={1000}
+							duration={1500}
+							content={[
+								m.green_fair_myna_comfort(),
+								m.born_lofty_sparrow_vent(),
+								m.same_solid_fish_intend()
+							]}
+						/>
+					</h1>
+					<p class="text-xl font-semibold md:text-3xl">{m.tidy_honest_albatross_foster()}</p>
 				</div>
 			</div>
 		</div>
 
 		<div class="absolute bottom-0 w-full pb-1">
-			<div class="text-neutral-content mx-auto max-w-14 animate-bounce">
+			<div class="text-neutral-content mx-auto w-full max-w-14 animate-bounce">
 				<ArrowsDownLineIcon />
 			</div>
 		</div>
 	</section>
 
-	<section class="relative pt-8">
+	<section id="services" class="relative pt-8">
 		<div class="container mx-auto flex flex-col gap-4">
 			<div class="flex justify-center">
 				<h2 class="marked-heading text-2xl font-semibold">
@@ -47,59 +63,67 @@
 				</h2>
 			</div>
 
-			<div class="relative flex flex-col items-center gap-12 px-4">
+			<div class="relative grid grid-rows-3 gap-12 px-4">
 				<div
-					class="bg-base-200 border-base-300 prose prose-sm md:prose-base lg:prose-xl sticky top-8 h-[80vh] max-w-3xl overflow-y-scroll rounded-2xl border-2 px-4 py-2 shadow-lg"
+					class="card card-border bg-base-200 max-w-[35rem] opacity-0 shadow-xl"
+					{@attach intersect((element) => element.classList.add('animate-fly-in-left'))}
 				>
-					<h3 class="text-xl">{m.glad_brave_llama_blink()}</h3>
+					<div class="card-body">
+						<h3 class="card-title">{m.glad_brave_llama_blink()}</h3>
+						<p>
+							{m.merry_odd_blackbird_propel()}
+						</p>
 
-					<p>
-						{m.blue_vexed_jaguar_zip()}
-					</p>
-
-					<ul>
-						<li>
-							{m.plain_even_hound_scold()}
-						</li>
-						<li>{m.fit_cozy_coyote_twirl()}</li>
-						<li>{m.loved_fit_javelina_aim()}</li>
-					</ul>
+						<div class="card-actions justify-end">
+							<a href="/service-details/transformer-repair" class="btn btn-neutral">
+								{m.grand_knotty_monkey_bless()}
+							</a>
+						</div>
+					</div>
 				</div>
 
 				<div
-					class="bg-base-200 border-base-300 prose prose-sm md:prose-base lg:prose-xl sticky top-8 h-[80vh] max-w-3xl overflow-y-scroll rounded-2xl border-2 px-4 py-2 shadow-lg"
+					class="card card-border bg-base-200 max-w-[35rem] place-self-center-safe opacity-0 shadow-xl"
+					{@attach intersect((element) => element.classList.add('animate-fly-in-left'))}
 				>
-					<h3 class="text-xl">{m.loud_less_parakeet_attend()}</h3>
+					<div class="card-body">
+						<h3 class="card-title">{m.loud_less_parakeet_attend()}</h3>
+						<p>
+							{m.pretty_zippy_mule_fall()}
+						</p>
 
-					<p>
-						{m.pretty_zippy_mule_fall()}
-					</p>
-
-					<ul>
-						<li>
-							{m.awful_green_gibbon_imagine()}
-						</li>
-						<li>{m.basic_spry_hare_grace()}</li>
-						<li>{m.broad_weird_snail_beam()}</li>
-						<li>{m.jumpy_patient_iguana_favor()}</li>
-					</ul>
+						<div class="card-actions justify-end">
+							<a href="/service-details/transformer-repair" class="btn btn-neutral">
+								{m.grand_knotty_monkey_bless()}
+							</a>
+						</div>
+					</div>
 				</div>
 
 				<div
-					class="bg-base-200 border-base-300 prose prose-sm md:prose-base lg:prose-xl sticky top-8 h-[80vh] max-w-3xl overflow-y-scroll rounded-2xl border-2 px-4 py-2 shadow-lg"
+					class="card card-border bg-base-200 max-w-[35rem] opacity-0 shadow-xl"
+					style="place-self: start end;"
+					{@attach intersect((element) => element.classList.add('animate-fly-in-left'))}
 				>
-					<h3 class="text-xl">{m.every_direct_tiger_earn()}</h3>
+					<div class="card-body">
+						<h3 class="card-title">{m.every_direct_tiger_earn()}</h3>
+						<p>
+							{m.pretty_low_kestrel_bump()}
+						</p>
 
-					<p>
-						{m.pretty_low_kestrel_bump()}
-					</p>
+						<div class="card-actions justify-end">
+							<a href="/service-details/transformer-repair" class="btn btn-neutral">
+								{m.grand_knotty_monkey_bless()}
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<section class="pt-8">
-		<div class="container mx-auto flex flex-col gap-4">
+	<section id="about-us" class="pt-8">
+		<div class="container mx-auto flex flex-col items-center gap-4">
 			<div class="flex justify-center">
 				<h2 class="marked-heading text-2xl font-semibold">{m.minor_major_anaconda_praise()}</h2>
 			</div>
@@ -125,23 +149,25 @@
 	</section>
 
 	<section class="bg-accent text-accent-content py-12">
-		<div class="stats">
-			<div class="stat">
-				<div class="stat-value">2011</div>
-				<div class="stat-desc">{m.topical_smart_polecat_stir()}</div>
-			</div>
-			<div class="stat">
-				<div class="stat-value">700 &lt;</div>
-				<div class="stat-desc">{m.pretty_active_gibbon_promise()}</div>
-			</div>
-			<div class="stat">
-				<div class="stat-value">&gt; 200</div>
-				<div class="stat-desc">{m.that_honest_pelican_empower()}</div>
+		<div class="container mx-auto flex justify-center">
+			<div class="stats">
+				<div class="stat">
+					<div class="stat-value">2011</div>
+					<div class="stat-desc">{m.topical_smart_polecat_stir()}</div>
+				</div>
+				<div class="stat">
+					<div class="stat-value">700 &lt;</div>
+					<div class="stat-desc">{m.pretty_active_gibbon_promise()}</div>
+				</div>
+				<div class="stat">
+					<div class="stat-value">&gt; 200</div>
+					<div class="stat-desc">{m.that_honest_pelican_empower()}</div>
+				</div>
 			</div>
 		</div>
 	</section>
 
-	<section class="pt-8">
+	<section id="projects" class="pt-8">
 		<div class="container mx-auto">
 			<div class="flex justify-center">
 				<h2 class="marked-heading text-2xl font-semibold">{m.round_gross_dachshund_fetch()}</h2>
@@ -157,7 +183,7 @@
 		</div>
 	</section>
 
-	<section class="py-8">
+	<section id="contacts" class="py-8">
 		<div class="container mx-auto">
 			<div class="container mx-auto">
 				<div class="flex justify-center">
@@ -190,7 +216,7 @@
 </main>
 
 <footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10">
-	<form action="POST" class="flex justify-center">
+	<form action="POST" class="flex justify-center sm:place-self-end-safe sm:pr-8">
 		<fieldset class="fieldset bg-base-300 border-neutral/70 rounded-box w-xs border p-4">
 			<legend class="fieldset-legend">{m.long_inclusive_bat_link()}</legend>
 
@@ -234,6 +260,14 @@
 		<a href="tel://77471818112">+7 (747) 181-81-12</a>
 		<a href="mailto:ekibaztransformator@gmail.com">ekibaztransformator@gmail.com</a>
 		<a href="geo:51.726235,75.342502">{m.maroon_known_wallaby_agree()}</a>
+	</nav>
+	<nav>
+		<h6 class="footer-title">{m.dizzy_weary_gazelle_wave()}</h6>
+		<div class="grid grid-flow-col gap-4">
+			<a href="https://www.instagram.com/remonttransformatorov/" target="_blank" rel="noreferrer">
+				<InstagramIcon />
+			</a>
+		</div>
 	</nav>
 </footer>
 
