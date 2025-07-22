@@ -1,5 +1,9 @@
 node_modules
 
+# Configs
+*.yaml
+*.yml
+
 # Output
 .output
 .vercel

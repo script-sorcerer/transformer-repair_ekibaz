@@ -13,5 +13,8 @@ export default defineConfig({
 			disableAsyncLocalStorage: true,
 			strategy: ['url', 'cookie', 'baseLocale']
 		})
-	]
+	],
+	server: {
+		allowedHosts: ['localhost', '127.0.0.1', '0.0.0.0', 'egret-settling-ghost.ngrok-free.app']
+	}
 });
