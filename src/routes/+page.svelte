@@ -40,17 +40,7 @@
 			<div class="hero-overlay"></div>
 			<div class="hero-content text-neutral-content text-center">
 				<div class="max-w-xl">
-					<h1 class="mb-5 text-3xl font-bold md:text-5xl">
-						<TypeWriter
-							delay={1000}
-							duration={1500}
-							content={[
-								m.green_fair_myna_comfort(),
-								m.born_lofty_sparrow_vent(),
-								m.same_solid_fish_intend()
-							]}
-						/>
-					</h1>
+					<h1 class="mb-5 text-3xl font-bold md:text-5xl">{m.green_fair_myna_comfort()}</h1>
 					<p class="text-xl font-semibold md:text-3xl">{m.tidy_honest_albatross_foster()}</p>
 				</div>
 			</div>
@@ -72,7 +62,7 @@
 					</h2>
 				</div>
 
-				<div class="relative grid grid-rows-3 gap-12 px-4">
+				<div class="relative flex flex-wrap justify-center gap-12 px-4">
 					<div
 						class="card card-border bg-base-200 max-w-[35rem] opacity-0 shadow-xl"
 						{@attach intersect((element) => element.classList.add('animate-fly-in-left'))}
@@ -92,7 +82,7 @@
 					</div>
 
 					<div
-						class="card card-border bg-base-200 max-w-[35rem] place-self-center-safe opacity-0 shadow-xl"
+						class="card card-border bg-base-200 max-w-[35rem] opacity-0 shadow-xl"
 						{@attach intersect((element) => element.classList.add('animate-fly-in-left'))}
 					>
 						<div class="card-body">
@@ -103,25 +93,6 @@
 
 							<div class="card-actions justify-end">
 								<a href="/service-details/transformer-installation" class="btn btn-neutral">
-									{m.grand_knotty_monkey_bless()}
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div
-						class="card card-border bg-base-200 max-w-[35rem] opacity-0 shadow-xl"
-						style="place-self: start end;"
-						{@attach intersect((element) => element.classList.add('animate-fly-in-left'))}
-					>
-						<div class="card-body">
-							<h3 class="card-title">{m.every_direct_tiger_earn()}</h3>
-							<p>
-								{m.pretty_low_kestrel_bump()}
-							</p>
-
-							<div class="card-actions justify-end">
-								<a href="/service-details/welding-repair" class="btn btn-neutral">
 									{m.grand_knotty_monkey_bless()}
 								</a>
 							</div>
@@ -165,7 +136,7 @@
 						<div class="stat-desc">{m.topical_smart_polecat_stir()}</div>
 					</div>
 					<div class="stat">
-						<div class="stat-value">700 &lt;</div>
+						<div class="stat-value">&gt; 1000</div>
 						<div class="stat-desc">{m.pretty_active_gibbon_promise()}</div>
 					</div>
 					<div class="stat">
@@ -191,6 +162,72 @@
 				</div>
 
 				<div class="flex flex-wrap justify-center gap-6">
+					<a
+						href="https://kbienergy.kz/"
+						target="_blank"
+						rel="noreferrer"
+						class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md"
+					>
+						<div>
+							<img class="rounded-box h-auto w-37" src="/kbi-logo.png" alt="Логотип KBI Energy" />
+						</div>
+					</a>
+
+					<a
+						href="https://www.prommash.kz/"
+						target="_blank"
+						rel="noreferrer"
+						class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md"
+					>
+						<div>
+							<img
+								class="rounded-box min-w-10"
+								src="/promash-logo.svg"
+								alt={m.orange_keen_mule_persist()}
+							/>
+						</div>
+					</a>
+
+					<a
+						href="https://www.bogatyr.kz/"
+						target="_blank"
+						rel="noreferrer"
+						class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md"
+					>
+						<div>
+							<img
+								class="rounded-box min-w-10"
+								src="/bogatyr-logo.png"
+								alt={m.giant_vexed_crocodile_read()}
+							/>
+						</div>
+					</a>
+
+					<a
+						href="https://gres2.kz/"
+						target="_blank"
+						rel="noreferrer"
+						class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md"
+					>
+						<div>
+							<img
+								class="rounded-box min-w-10"
+								src="/gres-2-logo.png"
+								alt={m.true_mean_buzzard_hike()}
+							/>
+						</div>
+					</a>
+
+					<div class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md">
+						<div>
+							<img
+								class="rounded-box min-w-10"
+								src="/angrensor-logo.png"
+								alt="Логотип Ангренсор Энерого"
+							/>
+						</div>
+					</div>
+
 					<div class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md">
 						<div>
 							<img
@@ -208,36 +245,6 @@
 
 					<div class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md">
 						<div>
-							<img
-								class="rounded-box min-w-10"
-								src="/gres-1-logo.png"
-								alt={m.calm_flaky_javelina_create()}
-							/>
-						</div>
-						<div>
-							<a class="link" href="https://gres1.kz/" target="_blank" rel="noreferrer"
-								>{m.antsy_small_bee_laugh()}</a
-							>
-						</div>
-					</div>
-
-					<div class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md">
-						<div>
-							<img
-								class="rounded-box min-w-10"
-								src="/gres-2-logo.png"
-								alt={m.true_mean_buzzard_hike()}
-							/>
-						</div>
-						<div>
-							<a class="link" href="https://gres2.kz/" target="_blank" rel="noreferrer"
-								>{m.clean_patchy_tiger_grow()}</a
-							>
-						</div>
-					</div>
-
-					<div class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md">
-						<div>
 							<a class="link" href="https://www.maikainzoloto.kz/" target="_blank" rel="noreferrer"
 								>{m.calm_red_walrus_hack()}</a
 							>
@@ -245,18 +252,7 @@
 					</div>
 
 					<div class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md">
-						<div>
-							<img
-								class="rounded-box bg-neutral/80 min-w-10 dark:bg-transparent"
-								src="/bogatyr-logo.png"
-								alt={m.giant_vexed_crocodile_read()}
-							/>
-						</div>
-						<div>
-							<a class="link" href="https://www.bogatyr.kz/" target="_blank" rel="noreferrer"
-								>{m.quiet_day_jackdaw_mend()}</a
-							>
-						</div>
+						<div>Майкаинский известковый завод</div>
 					</div>
 
 					<div class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md">
@@ -371,7 +367,6 @@
 		<a href="tel:+77751670032">+7 (775) 167-00-32</a>
 		<a href="tel:+77471818112">+7 (747) 181-81-12</a>
 		<a href="mailto:ekibaztransformator@gmail.com">ekibaztransformator@gmail.com</a>
-		<a href={getGeoLink()}>{m.maroon_known_wallaby_agree()}</a>
 	</nav>
 	<nav>
 		<h6 class="footer-title">{m.dizzy_weary_gazelle_wave()}</h6>
