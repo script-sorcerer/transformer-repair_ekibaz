@@ -1,6 +1,3 @@
-import { Readable } from 'node:stream';
-import type { ReadableStream } from 'node:stream/web';
-
 export interface SendMessageOptions {
 	chatId: number | string;
 	text: string;
@@ -91,6 +88,6 @@ export class TelegramClient {
 			throw new Error('Response body is null');
 		}
 
-		return Readable.fromWeb(response.body as ReadableStream<unknown>);
+		return response.arrayBuffer();
 	}
 }

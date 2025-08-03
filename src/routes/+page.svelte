@@ -1,13 +1,17 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { intersect } from '$lib/attachments';
-	import { TypeWriter } from '$lib/components';
-	import { ArrowsDownLineIcon, InstagramIcon } from '$lib/icons';
+	import { ReachingNumber } from '$lib/components';
+	import { ArrowsDownLineIcon, InstagramIcon, WhatsappIcon } from '$lib/icons';
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale } from '$lib/paraglide/runtime';
+	import { bounceOut, cubicOut } from 'svelte/easing';
 	import type { PageProps } from './$types';
 
 	let { form }: PageProps = $props();
+
+	let repairCount: { run(): void };
+	let clientCount: { run(): void };
 
 	function getMapWidgetLang() {
 		const locale = getLocale();
@@ -24,15 +28,53 @@
 		}
 	}
 
-	function getGeoLink() {
-		const userAgent = navigator.userAgent;
-		if (userAgent.match(/iPhone|iPad|iPod/i)) {
-			return 'http://maps.apple.com/?ll=51.726235,75.342502';
-		} else {
-			return 'https://yandex.kz/maps/org/transformatorlardy_zhondeu/111640043673/?from=mapframe&ll=75.342502%2C51.726751&source=mapframe&utm_source=mapframe&z=18';
-		}
-	}
+	const schema = {
+		'@context': 'https://schema.org',
+		'@type': 'LocalBusiness',
+		name: m.shy_still_finch_dare(),
+		address: {
+			'@type': 'PostalAddress',
+			streetAddress: m.suave_next_lamb_cuddle(),
+			addressLocality: m.big_low_cougar_sail(),
+			addressCountry: 'KZ'
+		},
+		telephone: '+7-747-181-8112',
+		url: 'https://ekibaz.com/',
+		image: 'https://ekibaz.com/images/logo.jpg',
+		description: m.patient_zesty_pug_nourish()
+	};
 </script>
+
+<svelte:head>
+	<title>{m.sad_glad_parakeet_trip()}</title>
+	<meta name="description" content={m.silly_dry_porpoise_lock()} />
+	<meta name="keywords" content={m.lime_fun_jaguar_wish()} />
+
+	<meta property="og:title" content={m.sad_glad_parakeet_trip()} />
+	<meta property="og:description" content={m.nice_fuzzy_panther_breathe()} />
+	<meta property="og:image" content="https://ekibaz.com/images/transformer.jpg" />
+	<meta property="og:url" content="https://ekibaz.com/" />
+	<meta property="og:type" content="website" />
+	<meta property="og:locale" content="ru_RU" />
+	<meta property="og:locale:alternate" content="kk_KZ" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={m.strong_broad_bobcat_pave()} />
+	<meta name="twitter:description" content={m.aqua_east_camel_win()} />
+	<meta name="twitter:image" content="https://example.com/images/transformer.jpg" />
+
+	<link rel="alternate" hreflang="ru-RU" href="https://ekibaz.com/" />
+	<link rel="alternate" hreflang="kk-KZ" href="https://ekibaz.com/kk/" />
+	<link rel="alternate" hreflang="en-US" href="https://ekibaz.com/en/" />
+	<link rel="alternate" hreflang="x-default" href="https://ekibaz.com/" />
+
+	<meta name="geo.region" content="KZ-PAV" />
+	<meta name="geo.placename" content={m.big_low_cougar_sail()} />
+	<meta name="geo.position" content="75.342822;51.726338" />
+	<meta name="robots" content="index, follow, max-image-preview:large" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(schema)}</script>`}
+</svelte:head>
 
 <main>
 	<section class="relative">
@@ -128,19 +170,43 @@
 			</div>
 		</section>
 
-		<section class="bg-accent text-accent-content py-12">
+		<section
+			class="bg-accent text-accent-content py-12"
+			{@attach intersect(() => {
+				repairCount.run();
+				clientCount.run();
+			})}
+		>
 			<div class="container mx-auto flex justify-center">
 				<div class="stats">
-					<div class="stat">
+					<div class="stat px-4">
 						<div class="stat-value">2011</div>
 						<div class="stat-desc">{m.topical_smart_polecat_stir()}</div>
 					</div>
-					<div class="stat">
-						<div class="stat-value">&gt; 1000</div>
+					<div class="stat px-4">
+						<div class="stat-value">
+							&gt;
+							<ReachingNumber
+								target={1000}
+								digitCapacity={4}
+								duration={1500}
+								easing={cubicOut}
+								bind:this={repairCount}
+							/>
+						</div>
 						<div class="stat-desc">{m.pretty_active_gibbon_promise()}</div>
 					</div>
-					<div class="stat">
-						<div class="stat-value">&gt; 200</div>
+					<div class="stat px-4">
+						<div class="stat-value">
+							&gt;
+							<ReachingNumber
+								target={200}
+								digitCapacity={3}
+								duration={1500}
+								easing={cubicOut}
+								bind:this={clientCount}
+							/>
+						</div>
 						<div class="stat-desc">{m.that_honest_pelican_empower()}</div>
 					</div>
 				</div>
@@ -169,7 +235,7 @@
 						class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md"
 					>
 						<div>
-							<img class="rounded-box h-auto w-37" src="/kbi-logo.png" alt="Логотип KBI Energy" />
+							<img class="rounded-box h-auto w-37" src="/kbi-logo.webp" alt="Логотип KBI Energy" />
 						</div>
 					</a>
 
@@ -197,7 +263,7 @@
 						<div>
 							<img
 								class="rounded-box min-w-10"
-								src="/bogatyr-logo.png"
+								src="/bogatyr-logo.webp"
 								alt={m.giant_vexed_crocodile_read()}
 							/>
 						</div>
@@ -212,7 +278,7 @@
 						<div>
 							<img
 								class="rounded-box min-w-10"
-								src="/gres-2-logo.png"
+								src="/gres-2-logo.webp"
 								alt={m.true_mean_buzzard_hike()}
 							/>
 						</div>
@@ -222,7 +288,7 @@
 						<div>
 							<img
 								class="rounded-box min-w-10"
-								src="/angrensor-logo.png"
+								src="/angrensor-logo.webp"
 								alt="Логотип Ангренсор Энерого"
 							/>
 						</div>
@@ -373,6 +439,9 @@
 		<div class="grid grid-flow-col gap-4">
 			<a href="https://www.instagram.com/remonttransformatorov/" target="_blank" rel="noreferrer">
 				<InstagramIcon />
+			</a>
+			<a href="https://wa.me/+77471818112" target="_blank" rel="noreferrer">
+				<WhatsappIcon />
 			</a>
 		</div>
 	</nav>

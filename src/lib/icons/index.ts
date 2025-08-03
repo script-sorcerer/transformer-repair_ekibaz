@@ -5,3 +5,4 @@ export { default as LanguageIcon } from './LanguageIcon.svelte';
 export { default as RuFlagIcon } from './RuFlagIcon.svelte';
 export { default as KzFlagIcon } from './KzFlagIcon.svelte';
 export { default as UkFlagIcon } from './UkFlagIcon.svelte';
+export { default as WhatsappIcon } from './WhatsappIcon.svelte';

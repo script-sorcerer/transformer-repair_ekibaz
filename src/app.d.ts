@@ -8,11 +8,7 @@ declare global {
 		// interface PageState {}
 		interface Platform {
 			env: {
-				TELEGRAM_BOT_TOKEN: string;
-				TELEGRAM_CHAT_ID: string;
-				STORAGE_ACCOUNT_ID: string;
-				STORAGE_ACCESS_KEY_ID: string;
-				STORAGE_SECRET_ACCESS_KEY: string;
+				DB: D1Database;
 			};
 		}
 	}
@@ -93,5 +89,7 @@ declare global {
 		}
 	}
 }
+
+declare module 'dropcss';
 
 export {};

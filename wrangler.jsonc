@@ -5,6 +5,16 @@
     "compatibility_flags": [
         "nodejs_compat"
     ],
+    "observability": {
+        "enabled": true
+    },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "ekibaz-com",
+            "database_id": "d9bfb590-3fd9-43a9-b54a-0b401fccede1"
+        }
+    ],
     "assets": {
         "binding": "ASSETS",
         "directory": ".svelte-kit/cloudflare"
