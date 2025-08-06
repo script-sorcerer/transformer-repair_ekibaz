@@ -5,10 +5,10 @@
 	import { ArrowsDownLineIcon, InstagramIcon, WhatsappIcon } from '$lib/icons';
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale } from '$lib/paraglide/runtime';
-	import { bounceOut, cubicOut } from 'svelte/easing';
+	import { cubicOut } from 'svelte/easing';
 	import type { PageProps } from './$types';
 
-	let { form }: PageProps = $props();
+	let { form, data }: PageProps = $props();
 
 	let repairCount: { run(): void };
 	let clientCount: { run(): void };
@@ -181,7 +181,7 @@
 				<div class="stats">
 					<div class="stat px-4">
 						<div class="stat-value">2011</div>
-						<div class="stat-desc">{m.topical_smart_polecat_stir()}</div>
+						<div class="stat-desc text-neutral">{m.topical_smart_polecat_stir()}</div>
 					</div>
 					<div class="stat px-4">
 						<div class="stat-value">
@@ -194,7 +194,7 @@
 								bind:this={repairCount}
 							/>
 						</div>
-						<div class="stat-desc">{m.pretty_active_gibbon_promise()}</div>
+						<div class="stat-desc text-neutral">{m.pretty_active_gibbon_promise()}</div>
 					</div>
 					<div class="stat px-4">
 						<div class="stat-value">
@@ -207,16 +207,36 @@
 								bind:this={clientCount}
 							/>
 						</div>
-						<div class="stat-desc">{m.that_honest_pelican_empower()}</div>
+						<div class="stat-desc text-neutral">{m.that_honest_pelican_empower()}</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<section id="projects" class="pt-8">
-			<div class="container mx-auto">
+			<div class="container mx-auto flex flex-col gap-4">
 				<div class="flex justify-center">
 					<h2 class="marked-heading text-2xl font-semibold">{m.round_gross_dachshund_fetch()}</h2>
+				</div>
+
+				<div
+					class="rounded-box flex w-full snap-x snap-mandatory scroll-pl-6 gap-6 overflow-x-auto"
+				>
+					<div class="w-[calc(48%_-_(min(24rem,_85vw)_/_2))] shrink-0 snap-center"></div>
+					{#each data.projects as project}
+						{@const image = `https://assets.ekibaz.com/${project.storageFileKey}`}
+						<div class="shrink-0 snap-center snap-always first:pl-8 last:pr-8">
+							<div class="card bg-base-200 w-96 max-w-[80vw] shadow-md">
+								<figure>
+									<img src={image} alt={m.white_super_dachshund_fry()} />
+								</figure>
+								<div class="card-body">
+									<p>{project.description}</p>
+								</div>
+							</div>
+						</div>
+					{/each}
+					<div class="w-[calc(48%_-_(min(24rem,_85vw)_/_2))] shrink-0 snap-center"></div>
 				</div>
 			</div>
 		</section>

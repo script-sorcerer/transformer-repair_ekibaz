@@ -12,7 +12,8 @@
         {
             "binding": "DB",
             "database_name": "ekibaz-com",
-            "database_id": "08b62977-2bf8-4925-aa30-7a6ad17a540d"
+            "database_id": "08b62977-2bf8-4925-aa30-7a6ad17a540d",
+            "migrations_dir": "drizzle"
         }
     ],
     "assets": {
