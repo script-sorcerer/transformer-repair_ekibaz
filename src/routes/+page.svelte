@@ -40,7 +40,7 @@
 		},
 		telephone: '+7-747-181-8112',
 		url: 'https://ekibaz.com/',
-		image: 'https://ekibaz.com/images/logo.jpg',
+		image: 'https://ekibaz.com/android-chrome-512x512.png',
 		description: m.patient_zesty_pug_nourish()
 	};
 </script>
@@ -52,7 +52,7 @@
 
 	<meta property="og:title" content={m.sad_glad_parakeet_trip()} />
 	<meta property="og:description" content={m.nice_fuzzy_panther_breathe()} />
-	<meta property="og:image" content="https://ekibaz.com/images/transformer.jpg" />
+	<meta property="og:image" content="https://ekibaz.com/android-chrome-512x512.png" />
 	<meta property="og:url" content="https://ekibaz.com/" />
 	<meta property="og:type" content="website" />
 	<meta property="og:locale" content="ru_RU" />
@@ -61,7 +61,7 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={m.strong_broad_bobcat_pave()} />
 	<meta name="twitter:description" content={m.aqua_east_camel_win()} />
-	<meta name="twitter:image" content="https://example.com/images/transformer.jpg" />
+	<meta name="twitter:image" content="https://ekibaz.com/android-chrome-512x512.png" />
 
 	<link rel="alternate" hreflang="ru-RU" href="https://ekibaz.com/" />
 	<link rel="alternate" hreflang="kk-KZ" href="https://ekibaz.com/kk/" />

@@ -28,14 +28,14 @@
 
 	<meta property="og:title" content={m.neat_lazy_nils_trim()} />
 	<meta property="og:description" content={m.fair_solid_newt_radiate()} />
-	<meta property="og:image" content="https://ekibaz.com/images/transformer-installation.jpg" />
+	<meta property="og:image" content="https://ekibaz.com/android-chrome-512x512.png" />
 	<meta property="og:url" content="https://ekibaz.com/service-details/transformer-installation" />
 	<meta property="og:type" content="article" />
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={m.slow_each_sheep_roam()} />
 	<meta name="twitter:description" content={m.tasty_watery_beetle_nurture()} />
-	<meta name="twitter:image" content="https://ekibaz.com/images/transformer-installation.jpg" />
+	<meta name="twitter:image" content="https://ekibaz.com/android-chrome-512x512.png" />
 
 	<link
 		rel="alternate"

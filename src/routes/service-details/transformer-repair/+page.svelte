@@ -28,14 +28,14 @@
 
 	<meta property="og:title" content={m.sad_glad_parakeet_trip()} />
 	<meta property="og:description" content={m.seemly_formal_quail_reap()} />
-	<meta property="og:image" content="https://ekibaz.com/images/transformer-repair.jpg" />
+	<meta property="og:image" content="https://ekibaz.com/android-chrome-512x512.png" />
 	<meta property="og:url" content="https://ekibaz.com/service-details/transformer-repair" />
 	<meta property="og:type" content="article" />
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={m.strong_broad_bobcat_pave()} />
 	<meta name="twitter:description" content={m.full_trick_hedgehog_bend()} />
-	<meta name="twitter:image" content="https://example.com/images/transformer-repair.jpg" />
+	<meta name="twitter:image" content="https://ekibaz.com/android-chrome-512x512.png" />
 
 	<link
 		rel="alternate"
