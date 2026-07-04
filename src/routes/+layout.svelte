@@ -5,7 +5,7 @@
 	import { onNavigate } from '$app/navigation';
 	import { KzFlagIcon, LanguageIcon, RuFlagIcon, ToastIcon, UkFlagIcon } from '$lib/icons';
 	import { m } from '$lib/paraglide/messages';
-	import { ThemeSwitcher } from '$lib/components';
+	import { SiteFooter, ThemeSwitcher } from '$lib/components';
 
 	let { children } = $props();
 
@@ -52,16 +52,16 @@
 					class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
 				>
 					<li>
-						<a href="/">{m.knotty_new_salmon_belong()}</a>
+						<a href={localizeHref('/')}>{m.knotty_new_salmon_belong()}</a>
 					</li>
 					<li>
-						<a href="/#services">{m.teal_crazy_grizzly_endure()}</a>
+						<a href={localizeHref('/repair')}>{m.seo_nav_repair()}</a>
 					</li>
 					<li>
-						<a href="/#about-us">{m.minor_major_anaconda_praise()}</a>
+						<a href={localizeHref('/services')}>{m.seo_nav_services()}</a>
 					</li>
-					<li><a href="/#projects">{m.round_gross_dachshund_fetch()}</a></li>
-					<li><a href="/#contacts">{m.suave_zany_octopus_lead()}</a></li>
+					<li><a href={localizeHref('/regions')}>{m.seo_nav_regions()}</a></li>
+					<li><a href={localizeHref('/articles')}>{m.seo_nav_articles()}</a></li>
 				</ul>
 			</div>
 		</div>
@@ -69,16 +69,16 @@
 		<div class="navbar-center hidden md:flex">
 			<ul class="menu menu-horizontal px-1">
 				<li>
-					<a href="/">{m.knotty_new_salmon_belong()}</a>
+					<a href={localizeHref('/')}>{m.knotty_new_salmon_belong()}</a>
 				</li>
 				<li>
-					<a href="/#services">{m.teal_crazy_grizzly_endure()}</a>
+					<a href={localizeHref('/repair')}>{m.seo_nav_repair()}</a>
 				</li>
 				<li>
-					<a href="/#about-us">{m.minor_major_anaconda_praise()}</a>
+					<a href={localizeHref('/services')}>{m.seo_nav_services()}</a>
 				</li>
-				<li><a href="/#projects">{m.round_gross_dachshund_fetch()}</a></li>
-				<li><a href="/#contacts">{m.suave_zany_octopus_lead()}</a></li>
+				<li><a href={localizeHref('/regions')}>{m.seo_nav_regions()}</a></li>
+				<li><a href={localizeHref('/articles')}>{m.seo_nav_articles()}</a></li>
 			</ul>
 		</div>
 
@@ -107,6 +107,10 @@
 </header>
 
 {@render children()}
+
+{#if page.route.id !== '/'}
+	<SiteFooter />
+{/if}
 
 <div class="hidden">
 	{#each locales as locale}

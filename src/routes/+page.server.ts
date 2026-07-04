@@ -1,27 +1,7 @@
-import { error, fail } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from './$types';
+import { fail } from '@sveltejs/kit';
+import type { Actions } from './$types';
 import { TelegramClient } from '$lib/server/telegram/client';
 import { TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID } from '$env/static/private';
-import { drizzle } from 'drizzle-orm/d1';
-import { isNull, desc } from 'drizzle-orm';
-import { projects } from '$lib/server/db/schema';
-
-export const load = (async ({ platform }) => {
-	if (!platform) {
-		error(500, 'Platform not found');
-	}
-
-	const db = drizzle(platform.env.DB);
-
-	const projectEntities = await db
-		.select()
-		.from(projects)
-		.where(isNull(projects.deletedAt))
-		.limit(20)
-		.orderBy(desc(projects.createdAt));
-
-	return { projects: projectEntities };
-}) satisfies PageServerLoad;
 
 export const actions = {
 	default: async ({ request }) => {

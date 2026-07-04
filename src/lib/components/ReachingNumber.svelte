@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Tween } from 'svelte/motion';
+	import { prefersReducedMotion, Tween } from 'svelte/motion';
 
 	interface Props {
 		target: number;
@@ -10,20 +10,21 @@
 
 	let { target, digitCapacity, duration, easing }: Props = $props();
 
-	const value = new Tween(0, { duration, easing });
+	const value = new Tween(target, { duration, easing });
+	let hasRun = false;
 	let stringified = $derived(
 		digitCapacity
 			? `${value.current.toFixed(0)}`.padStart(digitCapacity, '0')
 			: `${value.current.toFixed(0)}`
 	);
 
-	export function run() {
-		if (value.current === target) {
-			return;
-		}
+	export async function run() {
+		if (hasRun || prefersReducedMotion.current) return;
 
-		value.set(target);
+		hasRun = true;
+		await value.set(0, { duration: 0 });
+		void value.set(target);
 	}
 </script>
 
-{stringified}
+<data value={target} aria-label={String(target)}>{stringified}</data>

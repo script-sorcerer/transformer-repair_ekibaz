@@ -1,38 +1,68 @@
-# sv
+# ekibaz.com
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Сайт услуг по ремонту трансформаторов на SvelteKit, развёрнутый в Cloudflare Workers.
 
-## Creating a project
+## Разработка
 
-If you're seeing this, you've probably already done this step. Congrats!
+Установите зависимости и создайте локальный `.env` по примеру `.env.example`:
 
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+npm ci
+cp .env.example .env
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+После заполнения Telegram-переменных:
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
+npm run check
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+## Обновление существующего Cloudflare Worker
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Конфигурация закрепляет имя существующего Worker: `transformer-repair`. Не запускайте
+`wrangler setup`, `wrangler init` и deploy с другим `--name`.
+
+Авторизуйтесь интерактивно:
+
+```bash
+npx wrangler login
+```
+
+Для CI вместо login задайте `CLOUDFLARE_API_TOKEN` в окружении, не сохраняя его в репозитории.
+
+Проверьте, что текущая учётная запись видит существующий Worker:
+
+```bash
+npm run cloudflare:verify
+```
+
+Подготовьте сборку и выполните dry-run без публикации:
+
+```bash
+npm run deploy:dry
+```
+
+Обновите существующий Worker:
+
+```bash
+npm run deploy
+```
+
+Deploy выполняется только после успешного `cloudflare:verify`. Флаг `--keep-vars` сохраняет
+переменные существующего Worker, а Cloudflare-секреты при обычном deploy не удаляются.
+
+Посмотреть историю развёртываний:
+
+```bash
+npm run cloudflare:list
+```
+
+Откатиться к конкретной версии:
+
+```bash
+npm run cloudflare:rollback -- <VERSION_ID>
+```
+
+Команда rollback запросит подтверждение перед переключением активной версии.

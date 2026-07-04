@@ -1,17 +1,20 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { intersect } from '$lib/attachments';
-	import { ReachingNumber } from '$lib/components';
+	import { ProjectsCarousel, ReachingNumber } from '$lib/components';
 	import { ArrowsDownLineIcon, InstagramIcon, WhatsappIcon } from '$lib/icons';
 	import { m } from '$lib/paraglide/messages';
-	import { getLocale } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
+	import { getSeoLocaleMetadata, type SiteLocale } from '$lib/seo';
+	import { projectCarouselItems } from '$lib/seo/works';
 	import { cubicOut } from 'svelte/easing';
 	import type { PageProps } from './$types';
 
-	let { form, data }: PageProps = $props();
+	let { form }: PageProps = $props();
 
 	let repairCount: { run(): void };
 	let clientCount: { run(): void };
+	const seoLocale = getSeoLocaleMetadata('/', getLocale() as SiteLocale);
 
 	function getMapWidgetLang() {
 		const locale = getLocale();
@@ -39,7 +42,7 @@
 			addressCountry: 'KZ'
 		},
 		telephone: '+7-747-181-8112',
-		url: 'https://ekibaz.com/',
+		url: seoLocale.canonical,
 		image: 'https://ekibaz.com/android-chrome-512x512.png',
 		description: m.patient_zesty_pug_nourish()
 	};
@@ -48,30 +51,35 @@
 <svelte:head>
 	<title>{m.sad_glad_parakeet_trip()}</title>
 	<meta name="description" content={m.silly_dry_porpoise_lock()} />
-	<meta name="keywords" content={m.lime_fun_jaguar_wish()} />
+	<link rel="canonical" href={seoLocale.canonical} />
 
 	<meta property="og:title" content={m.sad_glad_parakeet_trip()} />
 	<meta property="og:description" content={m.nice_fuzzy_panther_breathe()} />
 	<meta property="og:image" content="https://ekibaz.com/android-chrome-512x512.png" />
-	<meta property="og:url" content="https://ekibaz.com/" />
+	<meta property="og:url" content={seoLocale.canonical} />
 	<meta property="og:type" content="website" />
-	<meta property="og:locale" content="ru_RU" />
-	<meta property="og:locale:alternate" content="kk_KZ" />
+	<meta property="og:locale" content={seoLocale.ogLocale} />
+	{#each seoLocale.ogAlternates as alternate}
+		<meta property="og:locale:alternate" content={alternate} />
+	{/each}
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={m.strong_broad_bobcat_pave()} />
 	<meta name="twitter:description" content={m.aqua_east_camel_win()} />
 	<meta name="twitter:image" content="https://ekibaz.com/android-chrome-512x512.png" />
 
-	<link rel="alternate" hreflang="ru-RU" href="https://ekibaz.com/" />
-	<link rel="alternate" hreflang="kk-KZ" href="https://ekibaz.com/kk/" />
-	<link rel="alternate" hreflang="en-US" href="https://ekibaz.com/en/" />
-	<link rel="alternate" hreflang="x-default" href="https://ekibaz.com/" />
+	{#each seoLocale.alternates as alternate}
+		<link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+	{/each}
+	<link rel="alternate" hreflang="x-default" href={seoLocale.xDefault} />
 
 	<meta name="geo.region" content="KZ-PAV" />
 	<meta name="geo.placename" content={m.big_low_cougar_sail()} />
 	<meta name="geo.position" content="75.342822;51.726338" />
-	<meta name="robots" content="index, follow, max-image-preview:large" />
+	<meta
+		name="robots"
+		content={seoLocale.indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow'}
+	/>
 
 	{@html `<script type="application/ld+json">${JSON.stringify(schema)}</script>`}
 </svelte:head>
@@ -116,7 +124,7 @@
 							</p>
 
 							<div class="card-actions justify-end">
-								<a href="/service-details/transformer-repair" class="btn btn-neutral">
+								<a href={localizeHref('/repair/power-transformers')} class="btn btn-neutral">
 									{m.grand_knotty_monkey_bless()}
 								</a>
 							</div>
@@ -134,7 +142,7 @@
 							</p>
 
 							<div class="card-actions justify-end">
-								<a href="/service-details/transformer-installation" class="btn btn-neutral">
+								<a href={localizeHref('/services/installation')} class="btn btn-neutral">
 									{m.grand_knotty_monkey_bless()}
 								</a>
 							</div>
@@ -144,7 +152,7 @@
 			</div>
 		</section>
 
-		<section id="about-us" class="pt-8">
+		<section id="about-us" class="py-8">
 			<div class="container mx-auto flex flex-col items-center gap-4">
 				<div class="flex justify-center">
 					<h2 class="marked-heading text-2xl font-semibold">{m.minor_major_anaconda_praise()}</h2>
@@ -219,25 +227,7 @@
 					<h2 class="marked-heading text-2xl font-semibold">{m.round_gross_dachshund_fetch()}</h2>
 				</div>
 
-				<div
-					class="rounded-box flex w-full snap-x snap-mandatory scroll-pl-6 gap-6 overflow-x-auto"
-				>
-					<div class="w-[calc(48%_-_(min(24rem,_85vw)_/_2))] shrink-0 snap-center"></div>
-					{#each data.projects as project}
-						{@const image = `https://assets.ekibaz.com/${project.storageFileKey}`}
-						<div class="shrink-0 snap-center snap-always first:pl-8 last:pr-8">
-							<div class="card bg-base-200 w-96 max-w-[80vw] shadow-md">
-								<figure>
-									<img src={image} alt={m.white_super_dachshund_fry()} />
-								</figure>
-								<div class="card-body">
-									<p>{project.description}</p>
-								</div>
-							</div>
-						</div>
-					{/each}
-					<div class="w-[calc(48%_-_(min(24rem,_85vw)_/_2))] shrink-0 snap-center"></div>
-				</div>
+				<ProjectsCarousel items={projectCarouselItems} />
 			</div>
 		</section>
 

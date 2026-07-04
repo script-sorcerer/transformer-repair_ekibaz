@@ -4,8 +4,11 @@ export interface SendMessageOptions {
 	parseMode?: 'MarkdownV2' | 'HTML';
 }
 
-export interface GetFileOptions {
-	file_id: string;
+export interface SendPhotoOptions {
+	chatId: number | string;
+	photo: Blob;
+	fileName: string;
+	caption?: string;
 }
 
 interface TelegramResponse<TData> {
@@ -50,44 +53,23 @@ export class TelegramClient {
 		return result;
 	}
 
-	public async getFile(options: GetFileOptions) {
-		console.debug(JSON.stringify({ message: 'Getting file', options }));
+	public async sendPhoto(options: SendPhotoOptions) {
+		const { chatId, photo, fileName, caption } = options;
+		const body = new FormData();
+		body.set('chat_id', String(chatId));
+		body.set('photo', photo, fileName);
+		if (caption) body.set('caption', caption);
 
-		const { file_id } = options;
-
-		const url = `https://api.telegram.org/bot${this.token}/getFile`;
-		const body = JSON.stringify({
-			file_id
-		});
-
-		const response = await fetch(url, {
+		const response = await fetch(`https://api.telegram.org/bot${this.token}/sendPhoto`, {
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
 			body
 		});
-
-		const data: TelegramResponse<Telegram.File> = await response.json();
-		const { ok, result: file } = data;
-		if (!ok) {
-			console.debug(JSON.stringify({ message: 'Failed to get file', data }));
-			throw new Error('Failed to get file');
+		const data: TelegramResponse<unknown> = await response.json();
+		if (!data.ok) {
+			console.debug(JSON.stringify({ message: 'Failed to send photo', data }));
+			throw new Error('Failed to send photo');
 		}
 
-		return file;
-	}
-
-	public async downloadFile(file: Telegram.File) {
-		console.debug(JSON.stringify({ message: 'Downloading file', file }));
-
-		const url = `https://api.telegram.org/file/bot${this.token}/${file.file_path}`;
-
-		const response = await fetch(url);
-		if (response.body === null) {
-			throw new Error('Response body is null');
-		}
-
-		return response.arrayBuffer();
+		return data.result;
 	}
 }

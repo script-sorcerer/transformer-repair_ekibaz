@@ -1,2 +1,10 @@
 export { default as ThemeSwitcher } from './ThemeSwitcher.svelte';
 export { default as ReachingNumber } from './ReachingNumber.svelte';
+export { default as Breadcrumbs } from './Breadcrumbs.svelte';
+export { default as LeadForm } from './LeadForm.svelte';
+export { default as ProjectsCarousel } from './ProjectsCarousel.svelte';
+export { default as SeoHead } from './SeoHead.svelte';
+export { default as SeoIndexView } from './SeoIndexView.svelte';
+export { default as SeoPageView } from './SeoPageView.svelte';
+export { default as SiteFooter } from './SiteFooter.svelte';
+export { default as WorkGallery } from './WorkGallery.svelte';

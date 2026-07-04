@@ -24,8 +24,6 @@
 <svelte:head>
 	<title>{m.red_mean_lion_favor()}</title>
 	<meta name="description" content={m.hour_bald_hedgehog_bless()} />
-	<meta name="keywords" content={m.lime_fun_jaguar_wish()} />
-
 	<meta property="og:title" content={m.neat_lazy_nils_trim()} />
 	<meta property="og:description" content={m.fair_solid_newt_radiate()} />
 	<meta property="og:image" content="https://ekibaz.com/android-chrome-512x512.png" />
@@ -39,17 +37,12 @@
 
 	<link
 		rel="alternate"
-		hreflang="ru-RU"
+		hreflang="ru-KZ"
 		href="https://ekibaz.com/service-details/transformer-installation"
 	/>
 	<link
 		rel="alternate"
-		hreflang="kk-KZ"
-		href="https://ekibaz.com/kk/service-details/transformer-installation"
-	/>
-	<link
-		rel="alternate"
-		hreflang="en-US"
+		hreflang="en-KZ"
 		href="https://ekibaz.com/en/service-details/transformer-installation"
 	/>
 	<link

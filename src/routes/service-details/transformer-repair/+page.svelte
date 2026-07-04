@@ -24,8 +24,6 @@
 <svelte:head>
 	<title>{m.odd_mad_gopher_attend()}</title>
 	<meta name="description" content={m.small_bland_butterfly_fond()} />
-	<meta name="keywords" content={m.lime_fun_jaguar_wish()} />
-
 	<meta property="og:title" content={m.sad_glad_parakeet_trip()} />
 	<meta property="og:description" content={m.seemly_formal_quail_reap()} />
 	<meta property="og:image" content="https://ekibaz.com/android-chrome-512x512.png" />
@@ -39,17 +37,12 @@
 
 	<link
 		rel="alternate"
-		hreflang="ru-RU"
+		hreflang="ru-KZ"
 		href="https://ekibaz.com/service-details/transformer-repair"
 	/>
 	<link
 		rel="alternate"
-		hreflang="kk-KZ"
-		href="https://ekibaz.com/kk/service-details/transformer-repair"
-	/>
-	<link
-		rel="alternate"
-		hreflang="en-US"
+		hreflang="en-KZ"
 		href="https://ekibaz.com/en/service-details/transformer-repair"
 	/>
 	<link
