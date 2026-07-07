@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
 	import { localizeHref } from '$lib/paraglide/runtime';
-	import type { ProjectCarouselItem } from '$lib/seo/works';
+	import type { ProjectCarouselItem } from '$lib/seo/project-carousel';
 	import { onMount } from 'svelte';
 
 	const AUTO_SCROLL_SPEED = 32;

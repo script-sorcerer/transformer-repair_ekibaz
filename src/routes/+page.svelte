@@ -15,7 +15,7 @@
 		WEBSITE_ID,
 		type SiteLocale
 	} from '$lib/seo';
-	import { projectCarouselItems } from '$lib/seo/works';
+	import { projectCarouselItems } from '$lib/seo/project-carousel';
 	import { cubicOut } from 'svelte/easing';
 	import type { PageProps } from './$types';
 
@@ -23,6 +23,7 @@
 
 	let repairCount: { run(): void };
 	let clientCount: { run(): void };
+	let mapLoaded = $state(false);
 	const seoLocale = getSeoLocaleMetadata('/', getLocale() as SiteLocale);
 	const agentic = getAgenticCopy(getLocale());
 
@@ -40,6 +41,12 @@
 				return 'ru_RU';
 		}
 	}
+
+	const yandexMapPlaceUrl =
+		'https://yandex.kz/maps/ru/org/transformatorlardy_zhondeu/111640043673/?lang=ru&utm_medium=mapframe&utm_source=maps';
+	const yandexMapCategoryUrl =
+		'https://yandex.kz/maps/ru/29590/ekibastuz/category/electrical_equipment_repairs/184107046/?lang=ru&utm_medium=mapframe&utm_source=maps';
+	const yandexMapWidgetUrl = `https://yandex.kz/map-widget/v1/?ll=75.342822%2C51.726338&mode=poi&poi%5Bpoint%5D=75.342499%2C51.726237&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D111640043673&z=18&lang=${getMapWidgetLang()}`;
 
 	const schema = {
 		'@context': 'https://schema.org',
@@ -67,6 +74,7 @@
 	<title>{m.sad_glad_parakeet_trip()}</title>
 	<meta name="description" content={m.silly_dry_porpoise_lock()} />
 	<link rel="canonical" href={seoLocale.canonical} />
+	<link rel="preload" as="image" href="/hero-bg.webp" type="image/webp" fetchpriority="high" />
 
 	<meta property="og:title" content={m.sad_glad_parakeet_trip()} />
 	<meta property="og:description" content={m.nice_fuzzy_panther_breathe()} />
@@ -102,8 +110,19 @@
 
 <main>
 	<section class="relative">
-		<div class="hero min-h-screen">
-			<div class="hero-overlay"></div>
+		<div class="hero relative min-h-screen overflow-hidden">
+			<img
+				class="absolute inset-0 h-full w-full object-cover"
+				src="/hero-bg.webp"
+				alt=""
+				aria-hidden="true"
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+				width="1920"
+				height="1080"
+			/>
+			<div class="hero-overlay hero-performance-overlay"></div>
 			<div class="hero-content text-neutral-content text-center">
 				<div class="max-w-xl">
 					<h1 class="mb-5 text-3xl font-bold md:text-5xl">{m.green_fair_myna_comfort()}</h1>
@@ -261,7 +280,13 @@
 						class="bg-base-200 rounded-box flex items-center gap-2 px-4 py-2 shadow-md"
 					>
 						<div>
-							<img class="rounded-box h-auto w-37" src="/kbi-logo.webp" alt="Логотип KBI Energy" />
+							<img
+								class="rounded-box h-auto w-37"
+								src="/kbi-logo.webp"
+								alt="Логотип KBI Energy"
+								loading="lazy"
+								decoding="async"
+							/>
 						</div>
 					</a>
 
@@ -276,6 +301,8 @@
 								class="rounded-box min-w-10"
 								src="/promash-logo.svg"
 								alt={m.orange_keen_mule_persist()}
+								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 					</a>
@@ -291,6 +318,8 @@
 								class="rounded-box min-w-10"
 								src="/bogatyr-logo.webp"
 								alt={m.giant_vexed_crocodile_read()}
+								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 					</a>
@@ -306,6 +335,8 @@
 								class="rounded-box min-w-10"
 								src="/gres-2-logo.webp"
 								alt={m.true_mean_buzzard_hike()}
+								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 					</a>
@@ -316,6 +347,8 @@
 								class="rounded-box min-w-10"
 								src="/angrensor-logo.webp"
 								alt="Логотип Ангренсор Энерого"
+								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 					</div>
@@ -326,6 +359,8 @@
 								class="rounded-box min-w-10"
 								src="/pves-logo.svg"
 								alt={m.bland_zany_samuel_cheer()}
+								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 						<div>
@@ -362,25 +397,41 @@
 					</div>
 				</div>
 
-				<div class="relative mt-4 flex justify-center overflow-hidden">
-					<a
-						href="https://yandex.kz/maps/ru/org/transformatorlardy_zhondeu/111640043673/?lang=ru&utm_medium=mapframe&utm_source=maps"
-						style="color:#eee;font-size:12px;position:absolute;top:0px;"
-						>{m.tasty_such_thrush_flop()}</a
-					><a
-						href="https://yandex.kz/maps/ru/29590/ekibastuz/category/electrical_equipment_repairs/184107046/?lang=ru&utm_medium=mapframe&utm_source=maps"
-						style="color:#eee;font-size:12px;position:absolute;top:14px;"
-						>{m.mealy_lower_blackbird_arrive()}</a
-					><iframe
-						title={m.formal_bald_iguana_absorb()}
-						src="https://yandex.kz/map-widget/v1/?ll=75.342822%2C51.726338&mode=poi&poi%5Bpoint%5D=75.342499%2C51.726237&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D111640043673&z=18&lang={getMapWidgetLang()}"
-						class="flex-1"
-						width="560"
-						height="400"
-						frameborder="1"
-						allowfullscreen={true}
-						style="position:relative;"
-					></iframe>
+				<div class="relative mt-4 flex min-h-[400px] justify-center overflow-hidden">
+					{#if mapLoaded}
+						<a href={yandexMapPlaceUrl} style="color:#eee;font-size:12px;position:absolute;top:0px;"
+							>{m.tasty_such_thrush_flop()}</a
+						><a
+							href={yandexMapCategoryUrl}
+							style="color:#eee;font-size:12px;position:absolute;top:14px;"
+							>{m.mealy_lower_blackbird_arrive()}</a
+						><iframe
+							title={m.formal_bald_iguana_absorb()}
+							src={yandexMapWidgetUrl}
+							class="flex-1"
+							width="560"
+							height="400"
+							frameborder="1"
+							allowfullscreen={true}
+							loading="lazy"
+							referrerpolicy="no-referrer-when-downgrade"
+							style="position:relative;"
+						></iframe>
+					{:else}
+						<div
+							class="border-base-300 bg-base-200 flex min-h-[400px] w-full max-w-5xl flex-col items-center justify-center gap-4 border px-4 text-center"
+						>
+							<p class="text-base-content/70 max-w-md">{m.formal_bald_iguana_absorb()}</p>
+							<div class="flex flex-wrap justify-center gap-3">
+								<button type="button" class="btn btn-neutral" onclick={() => (mapLoaded = true)}>
+									{m.formal_bald_iguana_absorb()}
+								</button>
+								<a class="btn btn-outline" href={yandexMapPlaceUrl} target="_blank" rel="noreferrer">
+									{m.tasty_such_thrush_flop()}
+								</a>
+							</div>
+						</div>
+					{/if}
 				</div>
 			</div>
 		</section>
@@ -499,17 +550,7 @@
 		}
 	}
 
-	section:has(.hero)::before {
-		content: '';
-		position: fixed;
-		z-index: -999;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		background:
-			linear-gradient(to bottom, rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.85)), url('/hero-bg.webp');
-		background-size: cover;
-		background-position: center top;
+	.hero-performance-overlay {
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.85));
 	}
 </style>

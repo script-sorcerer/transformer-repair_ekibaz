@@ -12,6 +12,7 @@ export interface SeoSection {
 export type GalleryItem =
 	| {
 			src: string;
+			thumbSrc?: string;
 			type: 'image';
 			width: number;
 			height: number;

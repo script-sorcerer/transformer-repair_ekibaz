@@ -1,6 +1,5 @@
 import { m } from '$lib/paraglide/messages';
 import {
-	getPageHref,
 	type BeforeAfterGallerySection,
 	type GalleryItem,
 	type SeoPageKind,
@@ -8,16 +7,6 @@ import {
 } from './content';
 
 type Message = () => string;
-
-export interface ProjectCarouselItem {
-	id: string;
-	src: string;
-	width: number;
-	height: number;
-	alt: Message;
-	description: Message;
-	href: string;
-}
 
 export interface WorkDefinition {
 	slug: string;
@@ -47,6 +36,7 @@ const image = ({
 }: ImageOptions): ImageGalleryItem => ({
 	type: 'image',
 	src: `/media/works/${workSlug}/${file}`,
+	thumbSrc: `/media/works-thumbs/${workSlug}/${file.replace(/\.[^.]+$/, '.jpg')}`,
 	width,
 	height,
 	alt: () => m.seo_gallery_photo_alt({ number, work: title() }),
@@ -417,25 +407,3 @@ export const getBeforeAfterGalleryForPage = (kind: SeoPageKind, slug: string) =>
 	workCatalog
 		.filter((work) => work.relatedPages.some((page) => page.kind === kind && page.slug === slug))
 		.flatMap((work) => work.beforeAfterGallery ?? []);
-
-export const projectCarouselItems: ProjectCarouselItem[] = workCatalog.map((work) => {
-	const relatedPage = work.relatedPages[0];
-	if (!relatedPage) {
-		throw new Error(`Work "${work.slug}" has no related SEO page`);
-	}
-
-	const item = work.carouselItem;
-	if (!item) {
-		throw new Error(`Work "${work.slug}" has no image for the homepage carousel`);
-	}
-
-	return {
-		id: work.slug,
-		src: item.src,
-		width: item.width,
-		height: item.height,
-		alt: item.alt,
-		description: work.title,
-		href: getPageHref(relatedPage)
-	};
-});

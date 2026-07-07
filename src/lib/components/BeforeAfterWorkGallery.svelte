@@ -66,7 +66,7 @@
 										>
 											<img
 												class="h-auto w-full"
-												src={item.src}
+												src={item.thumbSrc ?? item.src}
 												width={item.width}
 												height={item.height}
 												alt={item.alt()}
@@ -103,7 +103,7 @@
 										>
 											<img
 												class="h-auto w-full"
-												src={item.src}
+												src={item.thumbSrc ?? item.src}
 												width={item.width}
 												height={item.height}
 												alt={item.alt()}
