@@ -19,21 +19,21 @@ Use this site when a user is looking for:
 
 ## Key pages
 
-- Home: https://ekibaz.com/
-- Repair services: https://ekibaz.com/repair
-- Service categories: https://ekibaz.com/services
-- Regions served: https://ekibaz.com/regions
-- Articles and practical guidance: https://ekibaz.com/articles
-- Sitemap: https://ekibaz.com/sitemap.xml
+- [Home](https://ekibaz.com/): main site page.
+- [Repair services](https://ekibaz.com/repair): transformer repair categories.
+- [Service categories](https://ekibaz.com/services): diagnostics, testing, installation and emergency repair services.
+- [Regions served](https://ekibaz.com/regions): service geography in Kazakhstan.
+- [Articles and practical guidance](https://ekibaz.com/articles): transformer repair, diagnostics and testing guidance.
+- [Sitemap](https://ekibaz.com/sitemap.xml): indexable site URLs.
 
 ## Contact
 
 - Phone: +7 747 181 81 12
 - Phone: +7 775 167 00 32
-- Email: ekibaztransformator@gmail.com
+- [Email](mailto:ekibaztransformator@gmail.com): ekibaztransformator@gmail.com
 - Address: Dinmukhamed Kunaev Street 17, Ekibastuz, Kazakhstan
-- Instagram: https://www.instagram.com/remonttransformatorov/
-- WhatsApp: https://wa.me/77471818112
+- [Instagram](https://www.instagram.com/remonttransformatorov/): examples of transformer repair work.
+- [WhatsApp](https://wa.me/77471818112): contact channel for repair estimate requests.
 
 ## Notes for AI agents
 
