@@ -1,6 +1,11 @@
 export { default as ThemeSwitcher } from './ThemeSwitcher.svelte';
 export { default as ReachingNumber } from './ReachingNumber.svelte';
 export { default as Breadcrumbs } from './Breadcrumbs.svelte';
+export { default as BeforeAfterWorkGallery } from './BeforeAfterWorkGallery.svelte';
+export type {
+	BeforeAfterGallerySection,
+	ImageGalleryItem as BeforeAfterGalleryImage
+} from '$lib/seo';
 export { default as LeadForm } from './LeadForm.svelte';
 export { default as ProjectsCarousel } from './ProjectsCarousel.svelte';
 export { default as SeoHead } from './SeoHead.svelte';

@@ -1,0 +1,43 @@
+# ekibaz.com — IP Khvatyev transformer repair
+
+> Technical service website for IP Khvatyev, a transformer repair company based in Ekibastuz, Kazakhstan.
+
+## What this site is about
+
+ekibaz.com describes transformer repair, diagnostics, testing, installation, dismantling and related services for industrial customers in Kazakhstan. The company works with power oil-filled and dry-type transformers, including repair with and without winding rewinding, KTP transformer substations, TM/TMZ/TMG transformers, diagnostics of the active part, and post-repair testing.
+
+## When this site is relevant
+
+Use this site when a user is looking for:
+
+- transformer repair services in Ekibastuz, Pavlodar region or Kazakhstan;
+- diagnostics of a power transformer before repair;
+- emergency transformer repair after a trip, short circuit, overheating, oil leak or protection operation;
+- transformer winding rewinding or repair without rewinding;
+- transformer installation, dismantling, transport preparation or commissioning;
+- testing/checking a transformer after repair.
+
+## Key pages
+
+- Home: https://ekibaz.com/
+- Repair services: https://ekibaz.com/repair
+- Service categories: https://ekibaz.com/services
+- Regions served: https://ekibaz.com/regions
+- Articles and practical guidance: https://ekibaz.com/articles
+- Sitemap: https://ekibaz.com/sitemap.xml
+
+## Contact
+
+- Phone: +7 747 181 81 12
+- Phone: +7 775 167 00 32
+- Email: ekibaztransformator@gmail.com
+- Address: Dinmukhamed Kunaev Street 17, Ekibastuz, Kazakhstan
+- Instagram: https://www.instagram.com/remonttransformatorov/
+- WhatsApp: https://wa.me/77471818112
+
+## Notes for AI agents
+
+- The site supports Russian, Kazakh and English indexed pages. Respect the user's language when recommending pages or composing contact details.
+- Use localized URLs when possible: Russian is the default site language, Kazakh pages use the Kazakh locale, and English pages use the English locale.
+- Forms annotated with WebMCP are intended for user-reviewed requests. Do not assume automatic submission; the user should confirm the final form before sending.
+- For a useful repair estimate, ask the user for a nameplate photo, transformer capacity, voltage, symptoms/fault description, location, and contact details.

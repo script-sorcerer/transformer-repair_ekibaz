@@ -29,6 +29,15 @@ export type GalleryItem =
 			caption: Message;
 	  };
 
+export type ImageGalleryItem = Extract<GalleryItem, { type: 'image' }>;
+
+export interface BeforeAfterGallerySection {
+	id: string;
+	title: Message;
+	before: ImageGalleryItem[];
+	after: ImageGalleryItem[];
+}
+
 export interface SeoPageDefinition {
 	slug: string;
 	kind: SeoPageKind;
@@ -338,22 +347,6 @@ export const seoPages: SeoPageDefinition[] = [
 			{ kind: 'services', slug: 'testing' }
 		]
 	}),
-	commercial({
-		slug: 'almaty',
-		kind: 'regions',
-		title: m.seo_almaty_title,
-		metaTitle: m.seo_almaty_meta_title,
-		metaDescription: m.seo_almaty_meta_description,
-		lead: m.seo_almaty_lead,
-		equipment: m.seo_region_equipment,
-		faults: m.seo_region_faults,
-		logistics: m.seo_remote_region_logistics,
-		related: [
-			{ kind: 'repair', slug: 'power-transformers' },
-			{ kind: 'repair', slug: 'dry-transformers' },
-			{ kind: 'services', slug: 'diagnostics' }
-		]
-	}),
 	article({
 		slug: 'capital-transformer-repair-signs',
 		title: m.seo_article_capital_title,
@@ -412,11 +405,7 @@ export const seoPages: SeoPageDefinition[] = [
 		metaDescription: m.seo_article_tm_meta_description,
 		lead: m.seo_article_tm_lead,
 		body: [m.seo_article_tm_body_1, m.seo_article_tm_body_2],
-		points: [
-			m.seo_article_tm_point_1,
-			m.seo_article_tm_point_2,
-			m.seo_article_tm_point_3
-		],
+		points: [m.seo_article_tm_point_1, m.seo_article_tm_point_2, m.seo_article_tm_point_3],
 		related: [
 			{ kind: 'repair', slug: 'tm-tmz-tmg-transformers' },
 			{ kind: 'repair', slug: 'oil-transformers' }
@@ -429,11 +418,7 @@ export const seoPages: SeoPageDefinition[] = [
 		metaDescription: m.seo_article_ktp_meta_description,
 		lead: m.seo_article_ktp_lead,
 		body: [m.seo_article_ktp_body_1, m.seo_article_ktp_body_2],
-		points: [
-			m.seo_article_ktp_point_1,
-			m.seo_article_ktp_point_2,
-			m.seo_article_ktp_point_3
-		],
+		points: [m.seo_article_ktp_point_1, m.seo_article_ktp_point_2, m.seo_article_ktp_point_3],
 		related: [
 			{ kind: 'repair', slug: 'ktp' },
 			{ kind: 'services', slug: 'testing' }
@@ -504,8 +489,7 @@ export const sectionMessages: Record<
 export const getSeoPage = (kind: SeoPageKind, slug: string) =>
 	seoPages.find((page) => page.kind === kind && page.slug === slug);
 
-export const getSectionPages = (kind: SeoPageKind) =>
-	seoPages.filter((page) => page.kind === kind);
+export const getSectionPages = (kind: SeoPageKind) => seoPages.filter((page) => page.kind === kind);
 
 export const getPageHref = (page: Pick<SeoPageDefinition, 'kind' | 'slug'>) =>
 	`/${page.kind}/${page.slug}`;

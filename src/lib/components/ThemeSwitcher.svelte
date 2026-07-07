@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
 
+	let { label = 'Toggle theme' }: { label?: string } = $props();
+
 	onMount(() => {
 		themeChange(false);
 
@@ -22,7 +24,7 @@
 	data-toggle-theme="light,dark"
 	data-act-class="ACTIVECLASS"
 	class="btn btn-ghost btn-circle relative h-10 w-10 cursor-pointer border-none bg-none p-0"
-	aria-label="Toggle theme"
+	aria-label={label}
 >
 	<svg class="sun" viewBox="0 0 24 24">
 		<path

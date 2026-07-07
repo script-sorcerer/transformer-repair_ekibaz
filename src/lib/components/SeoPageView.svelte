@@ -2,6 +2,7 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages';
 	import {
+		getBeforeAfterGalleryForPage,
 		getGalleryForPage,
 		getPageHref,
 		getSeoPage,
@@ -12,6 +13,7 @@
 	import LeadForm from './LeadForm.svelte';
 	import SeoHead from './SeoHead.svelte';
 	import WorkGallery from './WorkGallery.svelte';
+	import BeforeAfterWorkGallery from './BeforeAfterWorkGallery.svelte';
 
 	interface LeadFormState {
 		success?: boolean;
@@ -32,6 +34,7 @@
 		form?: LeadFormState | null;
 	} = $props();
 
+	const beforeAfterGallery = getBeforeAfterGalleryForPage(page.kind, page.slug);
 	const gallery = getGalleryForPage(page.kind, page.slug);
 	const section = sectionMessages[page.kind];
 </script>
@@ -51,15 +54,15 @@
 		</header>
 
 		<article class="space-y-10">
-			{#each page.sections as section}
+			{#each page.sections as section (section.heading)}
 				<section class="prose md:prose-lg max-w-none">
 					<h2>{section.heading()}</h2>
-					{#each section.paragraphs ?? [] as paragraph}
+					{#each section.paragraphs ?? [] as paragraph (paragraph)}
 						<p>{paragraph()}</p>
 					{/each}
 					{#if section.items?.length}
 						<ul>
-							{#each section.items as item}
+							{#each section.items as item (item)}
 								<li>{item()}</li>
 							{/each}
 						</ul>
@@ -68,12 +71,19 @@
 			{/each}
 		</article>
 
-		<WorkGallery items={gallery} />
+		{#if beforeAfterGallery.length > 0 || gallery.length > 0}
+			<section class="space-y-5" aria-labelledby="work-gallery-heading">
+				<h2 id="work-gallery-heading" class="text-2xl font-bold">{m.seo_gallery_heading()}</h2>
+
+				<BeforeAfterWorkGallery sections={beforeAfterGallery} />
+				<WorkGallery items={gallery} />
+			</section>
+		{/if}
 
 		<section class="space-y-5" aria-labelledby="related-heading">
 			<h2 id="related-heading" class="text-2xl font-bold">{m.seo_related_heading()}</h2>
 			<div class="grid gap-4 md:grid-cols-3">
-				{#each page.related as relation}
+				{#each page.related as relation (`${relation.kind}/${relation.slug}`)}
 					{@const relatedPage = getSeoPage(relation.kind, relation.slug)}
 					{#if relatedPage}
 						<a

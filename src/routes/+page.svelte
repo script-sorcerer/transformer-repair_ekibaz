@@ -1,11 +1,20 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { getAgenticCopy } from '$lib/agentic';
 	import { intersect } from '$lib/attachments';
 	import { ProjectsCarousel, ReachingNumber } from '$lib/components';
 	import { ArrowsDownLineIcon, InstagramIcon, WhatsappIcon } from '$lib/icons';
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
-	import { getSeoLocaleMetadata, type SiteLocale } from '$lib/seo';
+	import {
+		BUSINESS_ID,
+		getBusinessSchema,
+		getSeoLocaleMetadata,
+		getWebsiteSchema,
+		toJsonLdScript,
+		WEBSITE_ID,
+		type SiteLocale
+	} from '$lib/seo';
 	import { projectCarouselItems } from '$lib/seo/works';
 	import { cubicOut } from 'svelte/easing';
 	import type { PageProps } from './$types';
@@ -15,6 +24,7 @@
 	let repairCount: { run(): void };
 	let clientCount: { run(): void };
 	const seoLocale = getSeoLocaleMetadata('/', getLocale() as SiteLocale);
+	const agentic = getAgenticCopy(getLocale());
 
 	function getMapWidgetLang() {
 		const locale = getLocale();
@@ -33,18 +43,23 @@
 
 	const schema = {
 		'@context': 'https://schema.org',
-		'@type': 'LocalBusiness',
-		name: m.shy_still_finch_dare(),
-		address: {
-			'@type': 'PostalAddress',
-			streetAddress: m.suave_next_lamb_cuddle(),
-			addressLocality: m.big_low_cougar_sail(),
-			addressCountry: 'KZ'
-		},
-		telephone: '+7-747-181-8112',
-		url: seoLocale.canonical,
-		image: 'https://ekibaz.com/android-chrome-512x512.png',
-		description: m.patient_zesty_pug_nourish()
+		'@graph': [
+			getBusinessSchema(),
+			getWebsiteSchema(m.silly_dry_porpoise_lock()),
+			{
+				'@type': 'WebPage',
+				'@id': `${seoLocale.canonical}#webpage`,
+				url: seoLocale.canonical,
+				name: m.sad_glad_parakeet_trip(),
+				description: m.silly_dry_porpoise_lock(),
+				isPartOf: { '@id': WEBSITE_ID },
+				about: { '@id': BUSINESS_ID },
+				primaryImageOfPage: {
+					'@type': 'ImageObject',
+					url: 'https://ekibaz.com/android-chrome-512x512.png'
+				}
+			}
+		]
 	};
 </script>
 
@@ -59,7 +74,7 @@
 	<meta property="og:url" content={seoLocale.canonical} />
 	<meta property="og:type" content="website" />
 	<meta property="og:locale" content={seoLocale.ogLocale} />
-	{#each seoLocale.ogAlternates as alternate}
+	{#each seoLocale.ogAlternates as alternate (alternate)}
 		<meta property="og:locale:alternate" content={alternate} />
 	{/each}
 
@@ -68,7 +83,7 @@
 	<meta name="twitter:description" content={m.aqua_east_camel_win()} />
 	<meta name="twitter:image" content="https://ekibaz.com/android-chrome-512x512.png" />
 
-	{#each seoLocale.alternates as alternate}
+	{#each seoLocale.alternates as alternate (alternate.hreflang)}
 		<link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
 	{/each}
 	<link rel="alternate" hreflang="x-default" href={seoLocale.xDefault} />
@@ -81,7 +96,8 @@
 		content={seoLocale.indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow'}
 	/>
 
-	{@html `<script type="application/ld+json">${JSON.stringify(schema)}</script>`}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	{@html toJsonLdScript(schema)}
 </svelte:head>
 
 <main>
@@ -372,7 +388,13 @@
 </main>
 
 <footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10">
-	<form method="POST" class="flex justify-center sm:place-self-end-safe sm:pr-8" use:enhance>
+	<form
+		method="POST"
+		class="flex justify-center sm:place-self-end-safe sm:pr-8"
+		toolname="ask_transformer_repair_question"
+		tooldescription={agentic.questionTool.description}
+		use:enhance
+	>
 		<fieldset class="fieldset bg-base-300 border-neutral/70 rounded-box w-xs border p-4">
 			<legend class="fieldset-legend">{m.long_inclusive_bat_link()}</legend>
 
@@ -385,7 +407,8 @@
 				name="name"
 				class="input rounded-4xl"
 				placeholder={m.cozy_nice_jackal_aid()}
-				value={form?.email ?? ''}
+				value={form?.name ?? ''}
+				toolparamdescription={agentic.questionTool.name}
 				required
 			/>
 			{#if form?.missingName}
@@ -400,6 +423,7 @@
 				class="input rounded-4xl"
 				placeholder={m.gray_mellow_lion_kiss()}
 				value={form?.email ?? ''}
+				toolparamdescription={agentic.questionTool.email}
 				required
 			/>
 			{#if form?.missingEmail}
@@ -413,6 +437,7 @@
 				class="textarea rounded-2xl"
 				placeholder={m.sad_icy_lark_prosper()}
 				value={form?.message ?? ''}
+				toolparamdescription={agentic.questionTool.message}
 				required
 			></textarea>
 			{#if form?.missingMessage}
@@ -448,10 +473,12 @@
 		<h6 class="footer-title">{m.dizzy_weary_gazelle_wave()}</h6>
 		<div class="grid grid-flow-col gap-4">
 			<a href="https://www.instagram.com/remonttransformatorov/" target="_blank" rel="noreferrer">
-				<InstagramIcon />
+				<span class="sr-only">{agentic.social.instagram}</span>
+				<span aria-hidden="true"><InstagramIcon /></span>
 			</a>
 			<a href="https://wa.me/+77471818112" target="_blank" rel="noreferrer">
-				<WhatsappIcon />
+				<span class="sr-only">{agentic.social.whatsapp}</span>
+				<span aria-hidden="true"><WhatsappIcon /></span>
 			</a>
 		</div>
 	</nav>

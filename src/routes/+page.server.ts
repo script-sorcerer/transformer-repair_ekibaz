@@ -25,7 +25,15 @@ export const actions = {
 			'<': '&lt;',
 			'>': '&gt;'
 		} as Record<string, string>;
+		const clearName = name.trim().replaceAll(/[&<>]/g, (tag) => tagsToReplace[tag] ?? tag);
+		const clearEmail = email.trim().replaceAll(/[&<>]/g, (tag) => tagsToReplace[tag] ?? tag);
 		const clearMessage = message.trim().replaceAll(/[&<>]/g, (tag) => tagsToReplace[tag] ?? tag);
+		if (clearName.length === 0) {
+			return fail(400, { name, email, message, missingName: true });
+		}
+		if (clearEmail.length === 0) {
+			return fail(400, { name, email, message, missingEmail: true });
+		}
 		if (clearMessage.length === 0) {
 			return fail(400, { name, email, message, emptyMessage: true });
 		}
@@ -38,7 +46,7 @@ export const actions = {
 		try {
 			await telegramClient.sendMessage({
 				chatId: TELEGRAM_CHAT_ID,
-				text: `Имя: <code>${name}</code>\nEmail: <code>${email}</code>\nСообщение: <blockquote expandable>${clearMessage}</blockquote>`,
+				text: `Имя: <code>${clearName}</code>\nEmail: <code>${clearEmail}</code>\nСообщение: <blockquote expandable>${clearMessage}</blockquote>`,
 				parseMode: 'HTML'
 			});
 		} catch (err) {

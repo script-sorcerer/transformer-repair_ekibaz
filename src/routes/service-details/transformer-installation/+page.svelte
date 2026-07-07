@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
+	import { toJsonLdScript } from '$lib/seo';
 
 	const schema = {
 		'@context': 'https://schema.org',
@@ -56,7 +57,8 @@
 	<meta name="geo.position" content="75.342822;51.726338" />
 	<meta name="robots" content="index, follow, max-image-preview:large" />
 
-	{@html `<script type="application/ld+json">${JSON.stringify(schema)}</script>`}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	{@html toJsonLdScript(schema)}
 </svelte:head>
 
 <main class="mt-20 flex justify-center px-4 py-2">

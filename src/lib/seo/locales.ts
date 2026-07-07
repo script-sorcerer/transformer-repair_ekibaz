@@ -4,11 +4,12 @@ export const SITE_URL = 'https://ekibaz.com';
 
 export const indexedSeoLocales = [
 	{ locale: 'ru', hreflang: 'ru-KZ', ogLocale: 'ru_KZ' },
+	{ locale: 'kk', hreflang: 'kk-KZ', ogLocale: 'kk_KZ' },
 	{ locale: 'en', hreflang: 'en-KZ', ogLocale: 'en_KZ' }
 ] as const;
 
 export type IndexedSeoLocale = (typeof indexedSeoLocales)[number]['locale'];
-export type SiteLocale = IndexedSeoLocale | 'kk';
+export type SiteLocale = IndexedSeoLocale;
 
 export const isIndexedSeoLocale = (locale: string): locale is IndexedSeoLocale =>
 	indexedSeoLocales.some((item) => item.locale === locale);

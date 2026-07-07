@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { getAgenticCopy } from '$lib/agentic';
 	import { m } from '$lib/paraglide/messages';
+	import { getLocale } from '$lib/paraglide/runtime';
 
 	interface LeadFormState {
 		success?: boolean;
@@ -21,7 +23,8 @@
 		form?: LeadFormState | null;
 	} = $props();
 
-	const whatsappText = encodeURIComponent(`${source}\n${m.seo_cta_text()}`);
+	const whatsappText = $derived(encodeURIComponent(`${source}\n${m.seo_cta_text()}`));
+	const agentic = getAgenticCopy(getLocale());
 </script>
 
 <section class="fieldset bg-base-300 border-neutral/70 rounded-box gap-8 border p-4 md:grid-cols-2">
@@ -38,7 +41,14 @@
 		</a>
 	</div>
 
-	<form method="POST" enctype="multipart/form-data" class="grid gap-3" use:enhance>
+	<form
+		method="POST"
+		enctype="multipart/form-data"
+		class="grid gap-3"
+		toolname="request_transformer_repair_estimate"
+		tooldescription={agentic.leadTool.description}
+		use:enhance
+	>
 		<input type="hidden" name="source" value={source} />
 		<div class="hidden" aria-hidden="true">
 			<label for="company-website">Website</label>
@@ -47,7 +57,13 @@
 
 		<label class="form-control">
 			<span class="label">{m.seo_form_name()}</span>
-			<input class="input input-bordered w-full" name="name" value={form?.name ?? ''} required />
+			<input
+				class="input input-bordered w-full"
+				name="name"
+				value={form?.name ?? ''}
+				toolparamdescription={agentic.leadTool.name}
+				required
+			/>
 		</label>
 		<label class="form-control">
 			<span class="label">{m.seo_form_contact()}</span>
@@ -55,6 +71,7 @@
 				class="input input-bordered w-full"
 				name="contact"
 				value={form?.contact ?? ''}
+				toolparamdescription={agentic.leadTool.contact}
 				required
 			/>
 		</label>
@@ -66,6 +83,7 @@
 					name="capacity"
 					placeholder={m.seo_form_capacity_placeholder()}
 					value={form?.capacity ?? ''}
+					toolparamdescription={agentic.leadTool.capacity}
 				/>
 			</label>
 			<label class="form-control">
@@ -75,6 +93,7 @@
 					name="voltage"
 					placeholder={m.seo_form_voltage_placeholder()}
 					value={form?.voltage ?? ''}
+					toolparamdescription={agentic.leadTool.voltage}
 				/>
 			</label>
 		</div>
@@ -84,6 +103,7 @@
 				class="textarea textarea-bordered min-h-28 w-full"
 				name="fault"
 				placeholder={m.seo_form_fault_placeholder()}
+				toolparamdescription={agentic.leadTool.fault}
 				value={form?.fault ?? ''}
 				required
 			></textarea>
@@ -95,6 +115,7 @@
 				type="file"
 				name="photo"
 				accept="image/jpeg,image/png,image/webp"
+				toolparamdescription={agentic.leadTool.photo}
 			/>
 			<span class="label text-xs">{m.seo_form_photo_hint()}</span>
 		</label>

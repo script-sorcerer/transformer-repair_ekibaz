@@ -20,49 +20,45 @@
 </script>
 
 {#if items.length > 0}
-	<section class="space-y-5" aria-labelledby="work-gallery-heading">
-		<h2 id="work-gallery-heading" class="text-2xl font-bold">{m.seo_gallery_heading()}</h2>
-
-		<div class="columns-1 gap-4 sm:columns-2 lg:columns-3">
-			{#each items as item}
-				<figure class="card bg-base-200 mb-4 break-inside-avoid overflow-hidden shadow-sm">
-					{#if item.type === 'image'}
-						<button
-							type="button"
-							class="cursor-zoom-in"
-							aria-label={`${m.seo_gallery_open()}: ${item.alt()}`}
-							onclick={() => openImage(item)}
-						>
-							<img
-								class="h-auto w-full"
-								src={item.src}
-								width={item.width}
-								height={item.height}
-								alt={item.alt()}
-								loading="lazy"
-								decoding="async"
-							/>
-						</button>
-					{:else}
-						<video
+	<div class="columns-1 gap-4 sm:columns-2 lg:columns-3">
+		{#each items as item (item.src)}
+			<figure class="card bg-base-200 mb-4 break-inside-avoid overflow-hidden shadow-sm">
+				{#if item.type === 'image'}
+					<button
+						type="button"
+						class="cursor-zoom-in"
+						aria-label={`${m.seo_gallery_open()}: ${item.alt()}`}
+						onclick={() => openImage(item)}
+					>
+						<img
 							class="h-auto w-full"
-							controls
-							playsinline
-							muted={!item.hasAudio}
-							preload="metadata"
-							poster={item.poster}
+							src={item.src}
 							width={item.width}
 							height={item.height}
-							aria-label={item.alt()}
-						>
-							<source src={item.src} />
-						</video>
-					{/if}
-					<figcaption class="px-4 py-3 text-sm">{item.caption()}</figcaption>
-				</figure>
-			{/each}
-		</div>
-	</section>
+							alt={item.alt()}
+							loading="lazy"
+							decoding="async"
+						/>
+					</button>
+				{:else}
+					<video
+						class="h-auto w-full"
+						controls
+						playsinline
+						muted={!item.hasAudio}
+						preload="metadata"
+						poster={item.poster}
+						width={item.width}
+						height={item.height}
+						aria-label={item.alt()}
+					>
+						<source src={item.src} />
+					</video>
+				{/if}
+				<figcaption class="px-4 py-3 text-sm">{item.caption()}</figcaption>
+			</figure>
+		{/each}
+	</div>
 
 	<dialog
 		bind:this={dialog}

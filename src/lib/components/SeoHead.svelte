@@ -2,9 +2,13 @@
 	import { getLocale } from '$lib/paraglide/runtime';
 	import {
 		getAbsoluteLocalizedUrl,
+		getBusinessSchema,
 		getGalleryForPage,
 		getPageHref,
 		getSeoLocaleMetadata,
+		toJsonLdScript,
+		BUSINESS_ID,
+		WEBSITE_ID,
 		sectionMessages,
 		SITE_URL,
 		type SiteLocale,
@@ -34,8 +38,10 @@
 	const schema = {
 		'@context': 'https://schema.org',
 		'@graph': [
+			getBusinessSchema(),
 			{
 				'@type': schemaType,
+				'@id': `${canonical}#${schemaType.toLowerCase()}`,
 				name: page.title(),
 				description: page.metaDescription(),
 				url: canonical,
@@ -43,21 +49,36 @@
 				provider:
 					schemaType === 'Service'
 						? {
-								'@type': 'LocalBusiness',
-								name: m.shy_still_finch_dare(),
-								telephone: '+7-747-181-8112',
-								address: {
-									'@type': 'PostalAddress',
-									streetAddress: m.suave_next_lamb_cuddle(),
-									addressLocality: m.big_low_cougar_sail(),
-									addressCountry: 'KZ'
-								}
+								'@id': BUSINESS_ID
 							}
 						: undefined,
 				author:
 					schemaType === 'Article'
-						? { '@type': 'Organization', name: m.shy_still_finch_dare() }
+						? {
+								'@id': BUSINESS_ID
+							}
+						: undefined,
+				publisher:
+					schemaType === 'Article'
+						? {
+								'@id': BUSINESS_ID
+							}
+						: undefined,
+				mainEntityOfPage:
+					schemaType === 'Article'
+						? {
+								'@id': `${canonical}#webpage`
+							}
 						: undefined
+			},
+			{
+				'@type': 'WebPage',
+				'@id': `${canonical}#webpage`,
+				url: canonical,
+				name: page.metaTitle(),
+				description: page.metaDescription(),
+				isPartOf: { '@id': WEBSITE_ID },
+				about: { '@id': BUSINESS_ID }
 			},
 			{
 				'@type': 'BreadcrumbList',
@@ -94,7 +115,7 @@
 		content={seoLocale.indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow'}
 	/>
 	<link rel="canonical" href={canonical} />
-	{#each seoLocale.alternates as alternate}
+	{#each seoLocale.alternates as alternate (alternate.hreflang)}
 		<link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
 	{/each}
 	<link rel="alternate" hreflang="x-default" href={seoLocale.xDefault} />
@@ -107,7 +128,7 @@
 	<meta property="og:url" content={canonical} />
 	<meta property="og:type" content={page.kind === 'articles' ? 'article' : 'website'} />
 	<meta property="og:locale" content={seoLocale.ogLocale} />
-	{#each seoLocale.ogAlternates as alternate}
+	{#each seoLocale.ogAlternates as alternate (alternate)}
 		<meta property="og:locale:alternate" content={alternate} />
 	{/each}
 
@@ -116,5 +137,6 @@
 	<meta name="twitter:description" content={page.metaDescription()} />
 	<meta name="twitter:image" content={socialImage} />
 
-	{@html `<script type="application/ld+json">${JSON.stringify(schema)}</script>`}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	{@html toJsonLdScript(schema)}
 </svelte:head>

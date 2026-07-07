@@ -3,8 +3,10 @@
 	import { locales, localizeHref, setLocale } from '$lib/paraglide/runtime';
 	import { page } from '$app/state';
 	import { onNavigate } from '$app/navigation';
+	import { getAgenticCopy } from '$lib/agentic';
 	import { KzFlagIcon, LanguageIcon, RuFlagIcon, ToastIcon, UkFlagIcon } from '$lib/icons';
 	import { m } from '$lib/paraglide/messages';
+	import { getLocale } from '$lib/paraglide/runtime';
 	import { SiteFooter, ThemeSwitcher } from '$lib/components';
 
 	let { children } = $props();
@@ -14,6 +16,7 @@
 		ru: RuFlagIcon,
 		en: UkFlagIcon
 	} as const;
+	const agentic = getAgenticCopy(getLocale());
 
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
@@ -30,8 +33,13 @@
 {#snippet languageSwitcher(locale: keyof typeof localeIcons)}
 	{@const Icon = localeIcons[locale]}
 	<li>
-		<button onclick={() => setLocale(locale)}>
-			<div class="w-full max-w-6">
+		<button
+			type="button"
+			aria-label={agentic.nav.switchLanguage[locale]}
+			title={agentic.nav.switchLanguage[locale]}
+			onclick={() => setLocale(locale)}
+		>
+			<div class="w-full max-w-6" aria-hidden="true">
 				<Icon />
 			</div>
 		</button>
@@ -42,27 +50,29 @@
 	<div class="navbar bg-base-100 shadow-sm">
 		<div class="navbar-start">
 			<div class="dropdown">
-				<div tabindex="0" role="button" class="btn btn-ghost h-6 w-6 md:hidden">
-					<ToastIcon />
-				</div>
-
-				<ul
-					tabindex="0"
-					role="menu"
-					class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-				>
-					<li>
-						<a href={localizeHref('/')}>{m.knotty_new_salmon_belong()}</a>
-					</li>
-					<li>
-						<a href={localizeHref('/repair')}>{m.seo_nav_repair()}</a>
-					</li>
-					<li>
-						<a href={localizeHref('/services')}>{m.seo_nav_services()}</a>
-					</li>
-					<li><a href={localizeHref('/regions')}>{m.seo_nav_regions()}</a></li>
-					<li><a href={localizeHref('/articles')}>{m.seo_nav_articles()}</a></li>
-				</ul>
+				<details class="md:hidden">
+					<summary class="btn btn-ghost h-10 w-10">
+						<span class="sr-only">{agentic.nav.openMenu}</span>
+						<span class="w-6" aria-hidden="true">
+							<ToastIcon />
+						</span>
+					</summary>
+					<ul
+						class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+					>
+						<li>
+							<a href={localizeHref('/')}>{m.knotty_new_salmon_belong()}</a>
+						</li>
+						<li>
+							<a href={localizeHref('/repair')}>{m.seo_nav_repair()}</a>
+						</li>
+						<li>
+							<a href={localizeHref('/services')}>{m.seo_nav_services()}</a>
+						</li>
+						<li><a href={localizeHref('/regions')}>{m.seo_nav_regions()}</a></li>
+						<li><a href={localizeHref('/articles')}>{m.seo_nav_articles()}</a></li>
+					</ul>
+				</details>
 			</div>
 		</div>
 
@@ -85,17 +95,18 @@
 		<div class="navbar-end">
 			<ul class="menu menu-horizontal items-center px-1">
 				<li>
-					<ThemeSwitcher />
+					<ThemeSwitcher label={agentic.nav.themeToggle} />
 				</li>
 				<li>
 					<details>
 						<summary>
-							<div class="w-full max-w-6">
+							<span class="sr-only">{agentic.nav.languageMenu}</span>
+							<div class="w-full max-w-6" aria-hidden="true">
 								<LanguageIcon />
 							</div>
 						</summary>
 						<ul class="bg-base-100 rounded-tnone p-2">
-							{#each locales as locale}
+							{#each locales as locale (locale)}
 								{@render languageSwitcher(locale)}
 							{/each}
 						</ul>
@@ -113,7 +124,7 @@
 {/if}
 
 <div class="hidden">
-	{#each locales as locale}
+	{#each locales as locale (locale)}
 		<a href={localizeHref(page.url.pathname, { locale })}>{locale}</a>
 	{/each}
 </div>
