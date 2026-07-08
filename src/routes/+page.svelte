@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { getAgenticCopy } from '$lib/agentic';
-	import { intersect } from '$lib/attachments';
+	import { intersect, intersectOnce } from '$lib/attachments';
 	import { ProjectsCarousel, ReachingNumber } from '$lib/components';
 	import { ArrowsDownLineIcon, InstagramIcon, WhatsappIcon } from '$lib/icons';
 	import { m } from '$lib/paraglide/messages';
@@ -397,7 +397,13 @@
 					</div>
 				</div>
 
-				<div class="relative mt-4 flex min-h-[400px] justify-center overflow-hidden">
+				<div
+					class="relative mt-4 flex min-h-[400px] justify-center overflow-hidden"
+					{@attach intersectOnce(() => (mapLoaded = true), {
+						rootMargin: '900px 0px',
+						threshold: 0
+					})}
+				>
 					{#if mapLoaded}
 						<a href={yandexMapPlaceUrl} style="color:#eee;font-size:12px;position:absolute;top:0px;"
 							>{m.tasty_such_thrush_flop()}</a
@@ -423,9 +429,6 @@
 						>
 							<p class="text-base-content/70 max-w-md">{m.formal_bald_iguana_absorb()}</p>
 							<div class="flex flex-wrap justify-center gap-3">
-								<button type="button" class="btn btn-neutral" onclick={() => (mapLoaded = true)}>
-									{m.formal_bald_iguana_absorb()}
-								</button>
 								<a class="btn btn-outline" href={yandexMapPlaceUrl} target="_blank" rel="noreferrer">
 									{m.tasty_such_thrush_flop()}
 								</a>
